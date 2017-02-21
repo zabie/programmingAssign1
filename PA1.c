@@ -115,12 +115,53 @@ struct edge{
     int end;
     int weight;
 }
+void makepqueue(){
+    int source, sink = -1;
+}
 
-struct graph{
-    int vertices;
-    int edges;
+void insert(int value){
+    if (sink > MAX){
+        printf("cannot insert");
+    }
+    if (source == -1) && (sink == -1)){
+        source++;
+        sink++;
+        pqueue(sink) = value;
+    }
+    else
+        validate(value);
+        sink;;
+    }
+}
+
+
+void validate(int value){
+    // not sure if needed
+}
+
+void deleteMin(int value){
+    int 
+}
+
+void minheapify(heap h, int root){
 
 }
+
+void buildheap(int graph[v][v]){
+    for (int i=array.length();i>1;i--){
+        minheapify(graph,i);
+    }
+}
+
+struct graph{
+ // size capacity and elements
+
+}
+
+// struct priorityqueue{
+//     int node;
+//     int neighbors;
+// }
 
 bool createCycle(edge){
     if visited
