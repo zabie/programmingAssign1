@@ -28,28 +28,81 @@
 #include <stdlib.h>
 
 int RAND_MAX = 1;
-int n; // number of total vertices in the graph
+
+int generateRand(){
+    srand(time(NULL));
+    return float r = rand();
+}
+
+struct node{
+    int source;
+    struct node *next;
+}
+
+struct adjcList{
+    struct adjcList *head;
+}
+
+struct graph{
+    int n;
+    struct adjcList* array;
+}
+
+struct adjcalistNode* newAdjcaListNode(int sink){
+    struct adjcalistNode * newNode = 
+        (struct adjcalistNode*) malloc(sizeof(struct adjcalistNode));
+    no->source = source;
+    no->sink = NULL;
+    return no;
+}
+// genereate graph represented by array of adjacency lists
+// one list per vertex
+int random_graph(int n){
+    // distance[n];
+    // graph* graphN = (graph)malloc(sizeof(graph));
+    // for (int i=0;i<n;i++){
+    //     for (int c=0;i<n;c++){
+    //         if(not at tail){
+    //             distance[i][c] = {generateRand(),c};
+    //             pointer to next in list;
+    //         }
+
+    //     }
+    //     adj_list[i] = NULL;
+
+    //     // read graph
+
+    //     node1 -> vertex = v;
+    //     node1 -> next = NULL;
+    // }
+
+    for (int i=0;i<n;i++){
+        for (int c=0;c<n;c++){
+            distance[i][c] = 
+        }
+    }
+
+}
 
 // input pointer to two-dimensional array 
 int primAlgo(int pointer){
-    int visited[v];
+    bool MST[v];
     int distance[v];
+
+
     int min = 999;
     int nodeco1;
     int nodeco2;
     int total;
     int s = 0; // random value within appropriate range;
-    // int mincost;
-   
-    // int curr;
-  //  int i = length of vertices;
-
-    // begin with empty spanning tree 
-    // initialize keys for vertices as infinity 
-    // int edges[v-1];
+    
+    // initialize values in MST to node visited as false
+    for (int i=0;i<v;i++){
+        MST[i] = false;
+    }
 
     for (int i=0;i<v;i++){
-        visited[i] = 0;
+        if[i] = 0;
         distance[i] = INFINITY;
     }
 
@@ -110,11 +163,12 @@ int graphAvg(int MST weight){
     print grahphs for many b
 }
 
-struct edge{
-    int start;
-    int end;
-    int weight;
+// create node with pointer to next in linked list
+struct node{
+    int source;
+    struct node *next;
 }
+
 void makepqueue(){
     int source, sink = -1;
 }
