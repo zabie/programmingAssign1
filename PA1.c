@@ -33,9 +33,9 @@ int RAND_MAX = 1;
 
 int main(){
     srand((unsigned int)time(NULL));
-    generateGraph1(n);
-    generateGraph2();
-    generateGraph3();
+    // generateGraph1(n);
+    // generateGraph2();
+    // generateGraph3();
 }
 
 
@@ -222,7 +222,7 @@ int primAlgo(int graph[v][v], distance){
 
 
 
-}
+//}
 
 // struct node{
 //     int source;
@@ -267,90 +267,90 @@ int primAlgo(int graph[v][v], distance){
     //     node1 -> next = NULL;
     // }
 
-    for (int i=0;i<n;i++){
-        for (int c=0;c<n;c++){
-            distance[i][c] = 
-        }
-    }
+//     for (int i=0;i<n;i++){
+//         for (int c=0;c<n;c++){
+//             distance[i][c] = 
+//         }
+//     }
 
-}
+// }
 
 // input pointer to two-dimensional array 
 
-int graphAvg(int MST weight){
-    print grahphs for many b
-}
+// int graphAvg(int MST weight){
+//     print grahphs for many b
+// }
 
-// create node with pointer to next in linked list
-struct node{
-    int source;
-    struct node *next;
-}
+// // create node with pointer to next in linked list
+// struct node{
+//     int source;
+//     struct node *next;
+// }
 
-void makepqueue(){
-    int source, sink = -1;
-}
+// void makepqueue(){
+//     int source, sink = -1;
+// }
 
-void insert(int value){
-    if (sink > MAX){
-        printf("cannot insert");
-    }
-    if (source == -1) && (sink == -1)){
-        source++;
-        sink++;
-        pqueue(sink) = value;
-    }
-    else
-        validate(value);
-        sink;;
-    }
-}
+// void insert(int value){
+//     if (sink > MAX){
+//         printf("cannot insert");
+//     }
+//     if (source == -1) && (sink == -1)){
+//         source++;
+//         sink++;
+//         pqueue(sink) = value;
+//     }
+//     else
+//         validate(value);
+//         sink;;
+//     }
+// }
 
-void minheapify(int *data, int i){
-    int lChild = 2*i +1;
-    int rChild = lChild + 1;
-    int min = i;
+// void minheapify(int *data, int i){
+//     int lChild = 2*i +1;
+//     int rChild = lChild + 1;
+//     int min = i;
 
-    if(heap[lChild] > heap[i]){
-        min = lChild;
-    }
-    else{
-        min = i;
-    }
-    if(heap[rChild] > heap[min]){
-        min = rChild;
-    }
-    if(largest != i){
-        swap(min, i);
-        minheapify(heap, min);
-    }
-}
+//     if(heap[lChild] > heap[i]){
+//         min = lChild;
+//     }
+//     else{
+//         min = i;
+//     }
+//     if(heap[rChild] > heap[min]){
+//         min = rChild;
+//     }
+//     if(largest != i){
+//         swap(min, i);
+//         minheapify(heap, min);
+//     }
+// }
 
-void swap(int *a, int *b){
-    int temp = *a;
-    *a = *b;
-    *b = temp;
-}
+// void swap(int *a, int *b){
+//     int temp = *a;
+//     *a = *b;
+//     *b = temp;
+// }
 
-void deleteMin(int value){
-    int 
-}
+// void deleteMin(int value){
+//     int 
+// }
 
-void minheapify(heap h, int root){
+// void minheapify(heap h, int root){
 
-}
+// }
 
-void buildheap(int graph[v][v]){
-    for (int i=array.length();i>1;i--){
-        minheapify(graph,i);
-    }
-}
+// void buildheap(int graph[v][v]){
+//     for (int i=array.length();i>1;i--){
+//         minheapify(graph,i);
+//     }
+// }
 
-bool createCycle(int node){
-    if (visited[node] == true){
-        return false;
-    }
-    else 
-        return true;
-}
+// bool createCycle(int node){
+//     if (visited[node] == true){
+//         return false;
+//     }
+//     else 
+//         return true;
+// }
 
