@@ -26,124 +26,114 @@
 
 #include <time.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include <math.h>
 
 int RAND_MAX = 1;
 
+int main(){
+    srand((unsigned int)time(NULL));
+    generateGraph1(n);
+    generateGraph2();
+    generateGraph3();
+}
+
+
 // generate a random float for edge weights
 float generateRand(){
-    srand((unsigned int)time(NULL));
-    return float)rand()/(float)(RAND_MAX);
+    return (float)rand()/(float)(RAND_MAX);
 }
 
 struct graph{
-    nodes;
-    edges;
-    list;
+    int nodes;
+    int edges;
+    void* distance;
 }
 
-struct dict{
-    int key;
-    int value;
-}
-
-graph generateGraph(int nodes){
-    graph *graph = malloc(sizeof(graph));
-    *g.nodes() = nodes;
-    *g.edges() = edges;
-
-
-    int count = 0;
+graph generateGraph1(int nodes){
+    float (*distance)[nodes] = malloc(sizeof(float[nodes][nodes]));
+    struct graph *finGraph = malloc(sizeof(struct graph));
+    finGraph->nodes = nodes;
+    finGraph->distance = distance;
 
     for (int i=0;i<nodes;i++){
         for (int a=0;a<i;a++){
             float rand = generateRand();
-            distance[i][a] = {nodes[i], rand}
-            // do some error checking here
-
-            }
-
+            distance[i][a] = rand;
+            distance[a][i] = rand;
         }
+
+        distance[i][i] = 0;
     }
 
-    return distance;
+    return finGraph;
 }
 
-void minheapify(int *data, int i){
-    int lChild = 2*i +1;
-    int rChild = lChild + 1;
-    int min = i;
+generateGraph2(int nodesArray[nodes]){
+    float (*distance)[nodes] = malloc(sizeof(float[nodes][nodes]));
+    struct graph *finGraph = malloc(sizeof(struct graph));
+    finGraph->nodes = nodes;
+    finGraph->distance = distance;
 
-    if(heap[lChild] > heap[i]){
-        min = lChild;
+
+    for (int i=0;i<nodes;i++){
+        for (int a=0;a<i;a++){
+            float dist1 = (a1-a2)**2;
+            float dist2 = (b1-b2)**2;
+            float dist = sqrt (dist1 + dist2);
+            distance[i][a] = dist;
+            distance[a][i] = dist;
+        }
+
+        distance[i][i] = 0;
     }
-    else{
-        min = i;
-    }
-    if(heap[rChild] > heap[min]){
-        min = rChild;
-    }
-    if(largest != i){
-        swap(min, i);
-        minheapify(heap, min);
-    }
+
+    return finGraph;
 }
 
-void swap(int *a, int *b){
-    int temp = *a;
-    *a = *b;
-    *b = temp;
 }
 
 int primAlgo(int graph[v][v], distance){
-    bool MST[v];
     
     int min = INFINITY; // how to actual assign to infinity ?
      
-    int final[v];
+    int final[nodes];
+    bool visited[nodes];
+    for (int i=0;i<nodes;i++){
+        visited[i] = false;
+    }
 
     // random value within appropriate range
-    int s = (int)generateRand() * *graph.nodes(); 
+    int s = (int)generateRand() * *inGraph->nodes; 
     
-    // initialize values in MST to node visited as false
-    for (int i=0;i<v;i++){
-        MST[i] = false;
-    }
+    visited[0] = s;
 
-    // first vertex picked first so initalize to 0
-    dict *distance[s].value() = 0;
-    for (int i=0; i<nodes; i++){
-        *dict[i].value() = INFINITE
-    }
-
-    for (int i=0;i<v;i++){
-        int a = getMin(*graph.key(), MST);
-        MST[i] == true;
-        if (graph[a][i] && MST[i] == false && graph[a][i] < *graph.key()[i]){
-            final[i] = a, *graph.key()[i] = graph[a][i]
+    // search through distance, min edge weight 
+    for (int i=0;i<nodes;i++){
+        for (int v=0;v<nodes;v++){
+            if (visited[i] == -false){
+                if (distance[i][v]<min){
+                    if(visited[i] == false && visited[b] == true ||
+                        visited[b] == true && visited[i] == false {
+                        min = distance[i][v];
+                    }
+                }
+            }
+            
+            final[i] = min;
         }
-    }
-
-    int average;
+    
+    float average;
     
     for (int i=0; i<final.length();i++){
         average = average + final[i];
     }
 
-    average = average/final.length();
+    average = average/.(nodes-1);
     
     return average;
 }
-
-int getMin(int key, int mst){
-    int minIndex;
-    for (int i=0;i<nodes;i++){
-        if (MST[i] == false && *dict.key()[i]<min){
-            min = key[i], minIndex = i;
-        }
-    return minIndex;
     
-    }
-}
 
     // find vertices not already conencted by adjacent to the one your choosing
     // see it's values and pick minimum
@@ -278,6 +268,31 @@ void insert(int value){
     }
 }
 
+void minheapify(int *data, int i){
+    int lChild = 2*i +1;
+    int rChild = lChild + 1;
+    int min = i;
+
+    if(heap[lChild] > heap[i]){
+        min = lChild;
+    }
+    else{
+        min = i;
+    }
+    if(heap[rChild] > heap[min]){
+        min = rChild;
+    }
+    if(largest != i){
+        swap(min, i);
+        minheapify(heap, min);
+    }
+}
+
+void swap(int *a, int *b){
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
 
 void deleteMin(int value){
     int 
