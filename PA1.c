@@ -66,10 +66,37 @@ graph generateGraph1(int nodes){
         distance[i][i] = 0;
     }
 
+
     return finGraph;
 }
 
 generateGraph2(int nodesArray[nodes]){
+    float (*distance)[nodes] = malloc(sizeof(float[nodes][nodes]));
+    struct graph *finGraph = malloc(sizeof(struct graph));
+    finGraph->nodes = nodes;
+    finGraph->distance = distance;
+
+
+    for (int i=0;i<nodes;i++){
+        for (int a=0;a<i;a++){
+            float a1 = generateRand();
+            float a2 = generateRand();
+            float b1 = generateRand();
+            float b2 = generateRand();
+            float dist1 = (a1-a2)**2;
+            float dist2 = (b1-b2)**2;
+            float dist = sqrt (dist1 + dist2);
+            distance[i][a] = dist;
+            distance[a][i] = dist;
+        }
+
+        distance[i][i] = 0;
+    }
+
+    return finGraph;
+}
+
+generateGraph3(int nodesArray[nodes]){
     float (*distance)[nodes] = malloc(sizeof(float[nodes][nodes]));
     struct graph *finGraph = malloc(sizeof(struct graph));
     finGraph->nodes = nodes;
@@ -90,9 +117,6 @@ generateGraph2(int nodesArray[nodes]){
 
     return finGraph;
 }
-
-}
-
 int primAlgo(int graph[v][v], distance){
     
     int min = INFINITY; // how to actual assign to infinity ?
