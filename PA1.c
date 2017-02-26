@@ -40,6 +40,7 @@ int main(){
 
 
 // generate a random float for edge weights
+*** how to make it dimensions
 float generateRand(){
     return (float)rand()/(float)(RAND_MAX);
 }
@@ -54,7 +55,7 @@ graph generateGraph1(int nodes){
     float (*distance)[nodes] = malloc(sizeof(float[nodes][nodes]));
     struct graph *finGraph = malloc(sizeof(struct graph));
     finGraph->nodes = nodes;
-    finGraph->distance = distance;
+    finGraph->distance = distance; // needs to be declared somewhere 
 
     for (int i=0;i<nodes;i++){
         for (int a=0;a<i;a++){
@@ -105,9 +106,16 @@ generateGraph3(int nodesArray[nodes]){
 
     for (int i=0;i<nodes;i++){
         for (int a=0;a<i;a++){
+            float a1 = generateRand();
+            float a2 = generateRand();
+            float b1 = generateRand();
+            float b2 = generateRand();
+            float c1 = generateRand();
+            float c2 = generateRand();
             float dist1 = (a1-a2)**2;
             float dist2 = (b1-b2)**2;
-            float dist = sqrt (dist1 + dist2);
+            float dist3 = (c1-c2)**2;
+            float dist = sqrt (dist1 + dist2 + dist3);
             distance[i][a] = dist;
             distance[a][i] = dist;
         }
@@ -121,41 +129,47 @@ int primAlgo(int graph[v][v], distance){
     
     int min = INFINITY; // how to actual assign to infinity ?
      
-    int final[nodes];
+    int final[nodes-1];
     bool visited[nodes];
+    int distUpate[nodes];
+
+    for (int i=0;i<nodes;i++){
+        distUpdate[i] = 2**64-1;
+    }
+
     for (int i=0;i<nodes;i++){
         visited[i] = false;
     }
 
-    // random value within appropriate range
-    int s = (int)generateRand() * *inGraph->nodes; 
+    // // random value within appropriate range
+    int s = (int)generateRand() * (*inGraph->nodes); 
     
-    visited[0] = s;
+    final = s;
+    visited[s] = true; // index into
 
     // search through distance, min edge weight 
-    for (int i=0;i<nodes;i++){
-        for (int v=0;v<nodes;v++){
-            if (visited[i] == -false){
-                if (distance[i][v]<min){
-                    if(visited[i] == false && visited[b] == true ||
-                        visited[b] == true && visited[i] == false {
-                        min = distance[i][v];
+    for (int st=0;st<nodes;st++){
+        for (int en=0;en<st;en++){
+            if (visited[en] == false){
+                if (distance[en][st]< distUpdate[en]){
+                    // if(visited[en] == false && visited[st] == true ||
+                    //     visited[st] == true && visited[en] == false {
+                        distUpdate[en] = distance[en][st];
                     }
                 }
             }
+
+            int min = INFINITY;
             
-            final[i] = min;
+            for (int i=0;i<distUpdate.length();i++){
+                if distUpdat[i]< min{
+                    min = distUpdate[i];
+                }
+            }
+            final += min of distUpdate; // use heaps?
         }
     
-    float average;
-    
-    for (int i=0; i<final.length();i++){
-        average = average + final[i];
-    }
-
-    average = average/.(nodes-1);
-    
-    return average;
+    return final/.(nodes-1);
 }
     
 
