@@ -26,20 +26,29 @@ void populate_nodes(int n, int dimension) {
     }
 }
 
-int main(void){
-    srand((unsigned int)time(NULL));
+int main(int argc, char *argv[]){
+     if(argc != 5) {
+         printf("Please enter correct number of command line arguments\n");
+     }
+     else{
+         int numpoints = atoi(argv[2]);
+         int numtrials = atoi(argv[3]);
+         int dimension = atoi(argv[4]);
+         srand((unsigned int)time(NULL));
+         float final;
+         for (int c=0;c<numtrials;c++){
+            populate_nodes(numpoints, dimension);
+            if (dimension == 1){
+                final = prims(numpoints, problem1Dist, dimension);
+            }
+            else{
+                final = prims(numpoints, euclideanDist, dimension);
+            }
+            
+            printf("Prims is %f\n", final);
+         }
+    }
 
-    // for (int i = 1; i < 100; i++) {
-    //     float final = prims(i * 4, problem1Dist, 0);
-    //     printf("Prims is %f\n", final);
-    // }
-
-    // int n = 100;
-    // for (int i = 1; i < 10; i++) {
-    //     populate_nodes(n, i);
-    //     float final = prims(n, euclideanDist, i);
-    //     printf("Prims is %f\n", final);
-    // }
     return 0;
 }
 
