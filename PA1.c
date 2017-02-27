@@ -2,174 +2,143 @@
 // CS124 Programming Assignment 1
 // February 27,2017
 
-
-// We will be considering complete, undirected graphs. A graph with n vertices is complete if all possible
-// edges are present in the graph.
-
-// Consider the following types of graphs:
-// • Complete graphs on n vertices, where the weight of each edge is a real number chosen uniformly at
-// random on [0, 1].
-
-// • Complete graphs on n vertices, where the vertices are points chosen uniformly at random inside the
-// unit square. (That is, the points are (x, y), with x and y each a real number chosen uniformly at
-// random from [0, 1].) The weight of an edge is just the Euclidean distance between its endpoints.
-// • Complete graphs on n vertices, where the vertices are points chosen uniformly at random inside the
-// unit cube (3 dimensions) and hypercube (4 dimensions). As with the unit square case above, the
-// weight of an edge is just the Euclidean distance between its endpoints.
-
-// Your first goal is to determine in each case how the expected (average) weight of the minimum
-// spanning tree (not an edge, the whole MST) grows as a function of n. This will require implementing an
-// MST algorithm, as well as procedures that generate the appropriate random graphs. (You should check
-// to see what sorts of random number generators are available on your system, and determine how to seed
-// them, say with a value from the machine’s clock.) You may implement any MST algorithm (or algorithms!)
-// you wish; however, I suggest you choose carefully
-
 #include <time.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
 
-int RAND_MAX = 1;
-
-int main(){
-    srand((unsigned int)time(NULL));
-    // generateGraph1(n);
-    // generateGraph2();
-    // generateGraph3();
-}
+// struct graph generateGraph2(struct graph finGraph);
+// int primAlgo(int graph[nodes][nodes], distance);
 
 
 // generate a random float for edge weights
-*** how to make it dimensions
+// *** how to make it dimensions
 float generateRand(){
     return (float)rand()/(float)(RAND_MAX);
 }
 
-struct graph{
+typedef struct graph{
     int nodes;
     int edges;
-    void* distance;
-}
+    float* distance;
+} graph;
 
-graph generateGraph1(int nodes){
-    float (*distance)[nodes] = malloc(sizeof(float[nodes][nodes]));
-    struct graph *finGraph = malloc(sizeof(struct graph));
+graph* generateGraph1(int nodes){
+    //float (*distance)[nodes] =  malloc(sizeof(float) * nodes * nodes);
+    graph *finGraph = malloc(sizeof(graph));
+    finGraph->distance = malloc(sizeof(float) * nodes * nodes);
     finGraph->nodes = nodes;
-    finGraph->distance = distance; // needs to be declared somewhere 
-
     for (int i=0;i<nodes;i++){
         for (int a=0;a<i;a++){
             float rand = generateRand();
-            distance[i][a] = rand;
-            distance[a][i] = rand;
+            *((float*) ((finGraph->distance) + (nodes * i) + a)) = rand;
+            *((float*) ((finGraph->distance) + (nodes * a) + i)) = rand;
         }
 
-        distance[i][i] = 0;
-    }
-
-
-    return finGraph;
-}
-
-generateGraph2(int nodesArray[nodes]){
-    float (*distance)[nodes] = malloc(sizeof(float[nodes][nodes]));
-    struct graph *finGraph = malloc(sizeof(struct graph));
-    finGraph->nodes = nodes;
-    finGraph->distance = distance;
-
-
-    for (int i=0;i<nodes;i++){
-        for (int a=0;a<i;a++){
-            float a1 = generateRand();
-            float a2 = generateRand();
-            float b1 = generateRand();
-            float b2 = generateRand();
-            float dist1 = (a1-a2)**2;
-            float dist2 = (b1-b2)**2;
-            float dist = sqrt (dist1 + dist2);
-            distance[i][a] = dist;
-            distance[a][i] = dist;
-        }
-
-        distance[i][i] = 0;
+        finGraph->distance[i*nodes + i] = 0;
     }
 
     return finGraph;
 }
 
-generateGraph3(int nodesArray[nodes]){
-    float (*distance)[nodes] = malloc(sizeof(float[nodes][nodes]));
-    struct graph *finGraph = malloc(sizeof(struct graph));
-    finGraph->nodes = nodes;
-    finGraph->distance = distance;
+// struct graph generateGraph2(int nodes){
+//     float(*distance)[nodes] = malloc(sizeof(float[nodes][nodes]));
+//     struct graph *finGraph = malloc(sizeof(struct graph));
+//     finGraph->nodes = nodes;
+//     finGraph->distance = distance;
 
 
-    for (int i=0;i<nodes;i++){
-        for (int a=0;a<i;a++){
-            float a1 = generateRand();
-            float a2 = generateRand();
-            float b1 = generateRand();
-            float b2 = generateRand();
-            float c1 = generateRand();
-            float c2 = generateRand();
-            float dist1 = (a1-a2)**2;
-            float dist2 = (b1-b2)**2;
-            float dist3 = (c1-c2)**2;
-            float dist = sqrt (dist1 + dist2 + dist3);
-            distance[i][a] = dist;
-            distance[a][i] = dist;
-        }
+//     for (int i=0;i<nodes;i++){
+//         for (int a=0;a<i;a++){
+//             float a1 = generateRand();
+//             float a2 = generateRand();
+//             float b1 = generateRand();
+//             float b2 = generateRand();
+//             float dist1 = (a1-a2)*(a1-a2);
+//             float dist2 = (b1-b2)*(b1-b2);
+//             float dist = sqrt (dist1 + dist2);
+//             distance[i][a] = dist;
+//             distance[a][i] = dist;
+//         }
 
-        distance[i][i] = 0;
-    }
+//         distance[i][i] = 0;
+//     }
 
-    return finGraph;
-}
-int primAlgo(int graph[v][v], distance){
+//     return finGraph;
+// }
+
+// struct graph generateGraph3(int nodes){
+//     float (*distance)[nodes] = malloc(sizeof(float[nodes][nodes]));
+//     struct graph *finGraph = malloc(sizeof(struct graph));
+//     finGraph->nodes = nodes;
+//     finGraph->distance = distance;
+
+
+//     for (int i=0;i<nodes;i++){
+//         for (int a=0;a<i;a++){
+//             float a1 = generateRand();
+//             float a2 = generateRand();
+//             float b1 = generateRand();
+//             float b2 = generateRand();
+//             float c1 = generateRand();
+//             float c2 = generateRand();
+//             float dist1 = (a1-a2)*(a1-a2);
+//             float dist2 = (b1-b2)*(b1-b2);
+//             float dist3 = (c1-c2)*(c1-c2);
+//             float dist = sqrt (dist1 + dist2 + dist3);
+//             distance[i][a] = dist;
+//             distance[a][i] = dist;
+//         }
+
+//         distance[i][i] = 0;
+//     }
+
+//     return finGraph;
+// }
+int primAlgo(int nodes, int graph[nodes * nodes]){
     
-    int min = INFINITY; // how to actual assign to infinity ?
+    int min = RAND_MAX; 
      
-    int final[nodes-1];
-    bool visited[nodes];
-    int distUpate[nodes];
+    int final = 0;
+    int visited[nodes];
+    int distUpdate[nodes];
 
     for (int i=0;i<nodes;i++){
-        distUpdate[i] = 2**64-1;
+        distUpdate[i] = RAND_MAX;
     }
 
     for (int i=0;i<nodes;i++){
-        visited[i] = false;
-    }
+        visited[i] = -1;
+     }
 
-    // // random value within appropriate range
-    int s = (int)generateRand() * (*inGraph->nodes); 
+    // // // random value within appropriate range
+    // int s = (int)generateRand() * (*finGraph->nodes); 
     
-    final = s;
-    visited[s] = true; // index into
+    // visited[s] = 0; // index into
 
     // search through distance, min edge weight 
     for (int st=0;st<nodes;st++){
         for (int en=0;en<st;en++){
-            if (visited[en] == false){
-                if (distance[en][st]< distUpdate[en]){
-                    // if(visited[en] == false && visited[st] == true ||
-                    //     visited[st] == true && visited[en] == false {
-                        distUpdate[en] = distance[en][st];
+            if (visited[en] == -1){
+                if (distance[en * nodes + st]< distUpdate[en]){
+                    // if(visited[en] == -1 && visited[st] == 0 ||
+                    //     visited[st] == 0 && visited[en] == -1 {
+                        distUpdate[en] = distance[en * nodes + st];
                     }
                 }
             }
 
-            int min = INFINITY;
+            int min = pow(2,64)-1;
             
-            for (int i=0;i<distUpdate.length();i++){
-                if distUpdat[i]< min{
+            for (int i=0;i<nodes;i++){
+                if (distUpdate[i]< min){
                     min = distUpdate[i];
                 }
             }
-            final += min of distUpdate; // use heaps?
+            final = final + min; // use heaps?
         }
     
-    return final/.(nodes-1);
+    return final / (float)((nodes-1));
 }
     
 
@@ -306,6 +275,12 @@ int primAlgo(int graph[v][v], distance){
 //     }
 // }
 
+// void swap(int *a, int *b){
+//     int temp = *a;
+//     *a = *b;
+//     *b = temp;
+// }
+
 // void minheapify(int *data, int i){
 //     int lChild = 2*i +1;
 //     int rChild = lChild + 1;
@@ -314,30 +289,17 @@ int primAlgo(int graph[v][v], distance){
 //     if(heap[lChild] > heap[i]){
 //         min = lChild;
 //     }
-//     else{
+
+//     else {
 //         min = i;
 //     }
 //     if(heap[rChild] > heap[min]){
 //         min = rChild;
 //     }
-//     if(largest != i){
+//     if(min != i){
 //         swap(min, i);
 //         minheapify(heap, min);
 //     }
-// }
-
-// void swap(int *a, int *b){
-//     int temp = *a;
-//     *a = *b;
-//     *b = temp;
-// }
-
-// void deleteMin(int value){
-//     int 
-// }
-
-// void minheapify(heap h, int root){
-
 // }
 
 // void buildheap(int graph[v][v]){
@@ -346,11 +308,9 @@ int primAlgo(int graph[v][v], distance){
 //     }
 // }
 
-// bool createCycle(int node){
-//     if (visited[node] == true){
-//         return false;
-//     }
-//     else 
-//         return true;
-// }
-
+int main( int argc, const char* argv[]){
+    srand((unsigned int)time(NULL));
+    //generateGraph1(10);
+    // generateGraph2();
+    // generateGraph3();
+}
