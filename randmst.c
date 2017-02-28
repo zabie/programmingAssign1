@@ -6,7 +6,7 @@
 
 #define MAX_NODES 100000
 #define MAX_DIMENSION 10
-#define FLOAT_MAX 10000.
+#define FLOAT_MAX pow(2,64)-1;
 
 float prims(int nodes, float (*distanceFn)(int, int, int), int dimension);
 float problem1Dist(int a, int b, int d);
@@ -106,7 +106,7 @@ float prims(int nodes, float (*distanceFn)(int, int, int), int dimension){
         float min = FLOAT_MAX;
         int minindex = -1;
         for (int i = 0; i < nodes; i++) {
-            if (!in_mst[i] && distance[i] < min) {
+            if (in_mst[i] == 0 && distance[i] < min) {
                 min = distance[i];
                 minindex = i;
             }
