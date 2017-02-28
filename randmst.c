@@ -17,11 +17,14 @@ float generateRand();
 float nodes[MAX_NODES][MAX_DIMENSION];
 
 void populate_nodes(int n, int dimension) {
-    for (int i = 0; i < n; ++i)
+    for (int i = 0; i< n; ++i)
     {
         for (int d = 0; d < dimension; ++d)
         {
+            
             nodes[i][d] = generateRand();
+            printf("%f, %i\n",nodes[i][d],i);
+
         }
     }
 }
@@ -38,7 +41,7 @@ int main(int argc, char *argv[]){
         float final;
         for (int c=0;c<numtrials;c++){
             populate_nodes(numpoints, dimension);
-            if (dimension == 1){
+            if (dimension == 0){
                 final = prims(numpoints, problem1Dist, dimension);
             }
             
@@ -68,6 +71,9 @@ float euclideanDist(int x, int y, int dimension){
     for (int i=0;i<dimension;i++){
         total += pow(nodes[x][i]-nodes[y][i],2);
     }
+    //printf("%f\n",total);
+    // printf("%f\n",sqrt(total));
+    // printf("%i %i\n",x,y);
     return sqrt(total);
 }
 
@@ -79,7 +85,6 @@ float prims(int nodes, float (*distanceFn)(int, int, int), int dimension){
         distance[i]= FLOAT_MAX;
     }
     
-
     int in_mst[nodes];
 
     for (int i=0;i<nodes;i++){
@@ -95,25 +100,28 @@ float prims(int nodes, float (*distanceFn)(int, int, int), int dimension){
     for (int x=1; x<nodes; x++){
         // Checking if i is a good idea
         for (int i=0; i<nodes; i++){
-            if (!in_mst[i]) {
+            if (in_mst[i] == 0) {
                 float temp= distanceFn(x, i, dimension);
                 if (temp < distance[i]){
                     distance[i]=temp;
+                    printf("distance is %f, %i, %I",distance[i]);
                 }
             }
         }
-
         float min = FLOAT_MAX;
         int minindex = -1;
         for (int i = 0; i < nodes; i++) {
             if (in_mst[i] == 0 && distance[i] < min) {
                 min = distance[i];
                 minindex = i;
+                printf("HELLO\n");
+                printf("%i",minindex);
             }
         }
 
         in_mst[minindex]=1;
         mstweight += min;
+        printf("mstweight is %f\n",mstweight);
     } 
 
     return mstweight;  
